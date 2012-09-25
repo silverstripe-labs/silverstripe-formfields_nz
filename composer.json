@@ -1,0 +1,16 @@
+{
+	"name": "silverstripe-labs/formfields_nz",
+	"description": "Country-specific form fields (New Zealand).",
+	"type": "silverstripe-module",
+	"keywords": ["silverstripe-labs", "formfields_nz", "forms"],
+	"authors": [
+	{
+		"name": "Ingo Schommer",
+		"email": "ingo@silverstripe.com"
+	}
+	],
+	"require":
+	{
+		"silverstripe/framework": "2.4"
+	}
+}
