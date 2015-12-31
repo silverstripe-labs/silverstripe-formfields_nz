@@ -6,12 +6,14 @@
  * @package formfields_nz
  * @see http://www.ird.govt.nz/payroll-employers/software-developers/software-specs/
  */
-class GSTNumberField extends TextField {
-	
-	function jsValidation() {
-		$formID = $this->form->FormName();
-		$error = _t('GSTNumberField.VALIDATIONJS', 'Please enter a valid GST Number');
-		$jsFunc =<<<JS
+class GSTNumberField extends TextField
+{
+    
+    public function jsValidation()
+    {
+        $formID = $this->form->FormName();
+        $error = _t('GSTNumberField.VALIDATIONJS', 'Please enter a valid GST Number');
+        $jsFunc =<<<JS
 Behaviour.register({
 	"#$formID": {
 		validateGSTNumber: function(fieldName) {
@@ -28,27 +30,28 @@ Behaviour.register({
 	}
 });
 JS;
-		Requirements::customScript($jsFunc, 'func_validateGSTNumber');
-		
-		return "\$('$formID').validateGSTNumber('$this->name');";
-	}
-	
-	function validate($validator){
-		$valid = preg_match(
-			'/^[0-9]{2}[\-]?[0-9]{3}[\-]?[0-9]{3,4}$/',
-			$this->value
-		);
-		
-		if(!$valid){
-			$validator->validationError(
-				$this->name, 
-				_t('GSTNumberField.VALIDATION', "Please enter a valid GST Number"),
-				"validation", 
-				false
-			);
-			return false;
-		}
-		
-		return true;
-	}
+        Requirements::customScript($jsFunc, 'func_validateGSTNumber');
+        
+        return "\$('$formID').validateGSTNumber('$this->name');";
+    }
+    
+    public function validate($validator)
+    {
+        $valid = preg_match(
+            '/^[0-9]{2}[\-]?[0-9]{3}[\-]?[0-9]{3,4}$/',
+            $this->value
+        );
+        
+        if (!$valid) {
+            $validator->validationError(
+                $this->name,
+                _t('GSTNumberField.VALIDATION', "Please enter a valid GST Number"),
+                "validation",
+                false
+            );
+            return false;
+        }
+        
+        return true;
+    }
 }
